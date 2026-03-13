@@ -1,0 +1,59 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### DEFAULT Laptop  - Top ### //
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules",
+  ],
+"custom/left-filler": {
+    "format": " "
+},
+"custom/right-filler": {
+    "format": " "
+},
+"layer": "top",
+//"mode": "dock",
+"exclusive": true,
+"passthrough": false,
+"position": "top",
+"spacing": 3,
+"fixed-center": true,
+"ipc": true,
+"margin-top": 0,
+"margin-left": 5,
+"margin-right": 5,
+
+"modules-left": ["custom/left-filler"],
+
+"modules-center": [
+	"custom/cava_mviz",
+	"mpris",
+	"hyprland/window",
+	"group/app_drawer",
+	"hyprland/workspaces#dots",
+	"clock",
+	"cpu",
+	"memory",
+	"temperature",
+	"battery",
+	"custom/weather",
+	"idle_inhibitor",	
+	"tray",
+	"group/notify",
+	"group/status"
+	],
+
+"modules-right": ["custom/right-filler"],
+
+"mpris": {
+	"format": " {dynamic}",
+	"format-paused": " <i>{dynamic}</i>",
+	"dynamic-order": ["title", "artist"],
+	"tooltip": true,
+	"tooltip-format": "{player} ({status})\n{title} - {artist}"
+}
+}

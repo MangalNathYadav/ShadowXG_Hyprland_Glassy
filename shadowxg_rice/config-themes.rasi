@@ -1,0 +1,67 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* Main Config (themes) */
+
+@import "~/.config/rofi/config.rasi"  
+
+/* ---- Configuration ---- */ 
+configuration {
+  modi: "drun";
+}
+
+window {
+  width: 80%;
+  height: inherit;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+  children:
+    [ "inputbar", "listview"];
+}
+
+entry {
+  expand: true;
+  placeholder: " 🎨 Search / Choose Theme";
+  horizontal-align: 0.5;
+}
+
+/* ---- Listview ---- */
+listview {
+  columns: 5;
+  lines: 2;
+  spacing: 20px;
+  padding: 10px;
+  flow: horizontal;
+  fixed-width: true;
+  fixed-height: true;
+  cycle: true;
+}
+
+/* ---- Element ---- */
+element {
+  orientation: vertical;
+  padding: 10px;
+  spacing: 5px;
+  border-radius: 10px;
+}
+
+element selected.normal {
+  background-color: #c19419;
+  text-color: #000000;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        25%;
+    cursor:                      inherit;
+    horizontal-align:            0.5;
+}
+
+element-text {
+  background-color:            transparent;
+  text-color:                  inherit;
+  vertical-align: 0.5;
+  horizontal-align: 0.5;
+  padding: 6px;
+}

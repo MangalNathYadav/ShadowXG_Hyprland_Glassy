@@ -1,0 +1,303 @@
+/* ---- Minimal Zen — Ultra-Clean Light Theme ---- */
+/* A calm, airy, and refined waybar with subtle warmth */
+
+@define-color zen-glass       rgba(255, 255, 255, 0.55);
+@define-color zen-glass-hover rgba(255, 255, 255, 0.72);
+@define-color zen-border      rgba(255, 255, 255, 0.45);
+@define-color zen-text        #2C2C2C;
+@define-color zen-text-dim    #6B6660;
+@define-color zen-accent      #5B7A5E;
+@define-color zen-accent-soft rgba(91, 122, 94, 0.15);
+@define-color zen-warn        #C9873E;
+@define-color zen-critical    #C45A5A;
+@define-color zen-info        #5A7EA6;
+
+* {
+    font-family: "Inter", "SF Pro Display", "JetBrainsMono Nerd Font";
+    font-weight: 500;
+    min-height: 0;
+    font-size: 13px;
+}
+
+window#waybar,
+window#waybar.empty,
+window#waybar.empty #window {
+    background-color: transparent;
+    padding: 0px;
+    border: 0px;
+}
+
+tooltip {
+    color: @zen-text;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 6px 10px;
+}
+
+tooltip label {
+    color: @zen-text;
+}
+
+/* ─── Module Groups — Frosted Glass ─── */
+.modules-left,
+.modules-center,
+.modules-right {
+    background-color: @zen-glass;
+    color: @zen-text;
+    border: 1px solid @zen-border;
+    border-radius: 12px;
+    padding: 2px 6px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Workspaces ─── */
+#taskbar button,
+#workspaces button {
+    color: @zen-text-dim;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0px 6px;
+    margin: 2px 1px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+#taskbar button:hover,
+#workspaces button:hover {
+    color: @zen-text;
+    background-color: rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+}
+
+#taskbar button.active,
+#workspaces button.active {
+    background-color: @zen-accent;
+    color: #FFFFFF;
+    padding: 0px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.persistent {
+    border-radius: 8px;
+}
+
+/* ─── All Modules — Uniform Spacing ─── */
+#backlight,
+#backlight-slider,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#disk,
+#idle_inhibitor,
+#keyboard-state,
+#memory,
+#mode,
+#mpris,
+#network,
+#power-profiles-daemon,
+#pulseaudio,
+#pulseaudio-slider,
+#taskbar,
+#temperature,
+#tray,
+#window,
+#wireplumber,
+#workspaces,
+#custom-backlight,
+#custom-nightlight,
+#custom-browser,
+#custom-cava_mviz,
+#custom-cycle_wall,
+#custom-dot_update,
+#custom-file_manager,
+#custom-keybinds,
+#custom-keyboard,
+#custom-light_dark,
+#custom-lock,
+#custom-hint,
+#custom-hypridle,
+#custom-menu,
+#custom-playerctl,
+#custom-power_vertical,
+#custom-power,
+#custom-quit,
+#custom-reboot,
+#custom-settings,
+#custom-spotify,
+#custom-swaync,
+#custom-tty,
+#custom-updater,
+#custom-hyprpicker,
+#custom-weather,
+#custom-weather.clearNight,
+#custom-weather.cloudyFoggyDay,
+#custom-weather.cloudyFoggyNight,
+#custom-weather.default,
+#custom-weather.rainyDay,
+#custom-weather.rainyNight,
+#custom-weather.severe,
+#custom-weather.showyIcyDay,
+#custom-weather.snowyIcyNight,
+#custom-weather.sunnyDay {
+    padding: 3px 8px;
+    margin: 1px 0px;
+    color: @zen-text;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+/* ─── Clock — The Centerpiece ─── */
+#clock {
+    font-weight: 600;
+    font-size: 13px;
+    color: @zen-text;
+    padding: 3px 12px;
+}
+
+/* ─── Window Title ─── */
+#window {
+    color: @zen-text-dim;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* ─── Tray ─── */
+#tray {
+    padding: 3px 6px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* ─── Battery ─── */
+#battery {
+    color: @zen-accent;
+}
+
+#battery.charging {
+    color: @zen-accent;
+}
+
+#battery.warning:not(.charging) {
+    color: @zen-warn;
+}
+
+#battery.critical:not(.charging) {
+    color: @zen-critical;
+    animation-name: blink;
+    animation-duration: 2.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* ─── Network ─── */
+#network {
+    color: @zen-text;
+}
+
+#network.disconnected {
+    color: @zen-text-dim;
+}
+
+/* ─── Audio ─── */
+#pulseaudio {
+    color: @zen-text;
+}
+
+#pulseaudio.muted {
+    color: @zen-text-dim;
+}
+
+/* ─── Temperature ─── */
+#temperature {
+    color: @zen-text;
+}
+
+#temperature.critical {
+    color: @zen-critical;
+}
+
+/* ─── Indicators ─── */
+#custom-hypridle.notactive,
+#idle_inhibitor.activated {
+    color: @zen-accent;
+}
+
+/* ─── Power Button ─── */
+#custom-power {
+    color: @zen-text-dim;
+    padding: 1px 6px;
+    margin-right: 2px;
+}
+
+/* ─── Player ─── */
+#custom-playerctl {
+    color: @zen-text-dim;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* ─── Cava Visualizer ─── */
+#custom-cava_mviz {
+    color: @zen-accent;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* ─── Weather ─── */
+#custom-weather {
+    color: @zen-info;
+}
+
+/* ─── Sliders ─── */
+#backlight-slider slider,
+#pulseaudio-slider slider {
+    min-width: 0px;
+    min-height: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    min-width: 70px;
+    min-height: 4px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    min-height: 4px;
+    border-radius: 4px;
+    background-color: @zen-accent;
+}
+
+/* ─── Separator ─── */
+#custom-separator {
+    color: @zen-border;
+    padding: 0 2px;
+}
+
+/* ─── Blink Animation (battery critical) ─── */
+@keyframes blink {
+    to {
+        color: @zen-bg;
+    }
+}

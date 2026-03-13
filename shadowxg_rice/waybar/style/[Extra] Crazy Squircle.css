@@ -1,0 +1,855 @@
+/* ============================================= */
+/*  🟣 CRAZY SQUIRCLE — Waybar Theme             */
+/*  Squircle shapes • Neon Plasma • Popup Drawers */
+/* ============================================= */
+
+/* ─── Color Palette ─── */
+@define-color sq-bg         rgba(12, 10, 20, 0.82);
+@define-color sq-bg-solid   #0c0a14;
+@define-color sq-surface    rgba(25, 20, 45, 0.9);
+@define-color sq-surface2   rgba(40, 30, 70, 0.85);
+@define-color sq-neon-pink  #ff2d95;
+@define-color sq-neon-cyan  #00f0ff;
+@define-color sq-neon-lime  #39ff14;
+@define-color sq-neon-purp  #bf5af2;
+@define-color sq-neon-orange #ff6b2b;
+@define-color sq-neon-gold  #ffd700;
+@define-color sq-text       #e8e0f0;
+@define-color sq-text-dim   #8a7fa8;
+@define-color sq-glow       rgba(191, 90, 242, 0.35);
+@define-color sq-glow-cyan  rgba(0, 240, 255, 0.3);
+@define-color sq-glow-pink  rgba(255, 45, 149, 0.3);
+@define-color sq-popup-bg   rgba(18, 14, 32, 0.95);
+@define-color sq-popup-border rgba(191, 90, 242, 0.6);
+
+/* ─── Global Reset ─── */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Anomaly Mono", "Fira Code", monospace;
+    font-weight: bold;
+    min-height: 0;
+    font-size: 97%;
+    font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── Main Bar ─── */
+window#waybar {
+    background: transparent;
+    color: @sq-text;
+}
+
+window#waybar.hidden {
+    opacity: 0;
+}
+
+/* ─── Tooltips — Floating Glass Cards ─── */
+tooltip {
+    background: @sq-popup-bg;
+    border-radius: 16px;
+    border: 2px solid @sq-popup-border;
+    color: @sq-text;
+    padding: 8px 12px;
+    box-shadow:
+        0 0 20px @sq-glow,
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+tooltip label {
+    color: @sq-text;
+    padding: 2px 4px;
+}
+
+/* ============================================= */
+/*  SQUIRCLE MODULE GROUPS (the 3 bar sections)  */
+/* ============================================= */
+
+.modules-left,
+.modules-center,
+.modules-right {
+    /* Squircle = high border-radius on a compact shape */
+    background: @sq-bg;
+    border-radius: 22px;
+    padding: 2px 6px;
+    margin: 3px 4px;
+    border: 2px solid transparent;
+    box-shadow:
+        0 0 15px @sq-glow,
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    animation: squircle-breathe 4s ease-in-out infinite;
+}
+
+.modules-left {
+    border-image: linear-gradient(135deg, @sq-neon-pink, @sq-neon-purp, transparent) 1;
+    border-image-slice: 1;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 22px;
+    /* GTK workaround: border-image breaks border-radius, so use outline */
+    border-image: none;
+    border-color: @sq-neon-pink;
+    box-shadow:
+        0 0 12px @sq-glow-pink,
+        0 0 30px rgba(255, 45, 149, 0.15),
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.modules-center {
+    border-color: @sq-neon-purp;
+    box-shadow:
+        0 0 12px @sq-glow,
+        0 0 30px rgba(191, 90, 242, 0.15),
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.modules-right {
+    border-color: @sq-neon-cyan;
+    box-shadow:
+        0 0 12px @sq-glow-cyan,
+        0 0 30px rgba(0, 240, 255, 0.15),
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ─── Breathing Glow Animation ─── */
+@keyframes squircle-breathe {
+    from {
+        box-shadow: 0 0 12px @sq-glow, 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    to {
+        box-shadow: 0 0 25px @sq-glow, 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+/* ============================================= */
+/*  🎰 ALL MODULE BASE STYLES (Squircle Pill)    */
+/* ============================================= */
+
+#backlight,
+#backlight-slider,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#disk,
+#idle_inhibitor,
+#keyboard-state,
+#memory,
+#mode,
+#mpris,
+#network,
+#power-profiles-daemon,
+#pulseaudio,
+#pulseaudio-slider,
+#taskbar,
+#temperature,
+#tray,
+#window,
+#wireplumber,
+#workspaces,
+#custom-backlight,
+#custom-nightlight,
+#custom-browser,
+#custom-cava_mviz,
+#custom-cycle_wall,
+#custom-dot_update,
+#custom-file_manager,
+#custom-keybinds,
+#custom-keyboard,
+#custom-light_dark,
+#custom-lock,
+#custom-hint,
+#custom-hypridle,
+#custom-menu,
+#custom-playerctl,
+#custom-power_vertical,
+#custom-power,
+#custom-quit,
+#custom-reboot,
+#custom-settings,
+#custom-spotify,
+#custom-swaync,
+#custom-tty,
+#custom-updater,
+#custom-hyprpicker,
+#custom-weather,
+#custom-weather.clearNight,
+#custom-weather.cloudyFoggyDay,
+#custom-weather.cloudyFoggyNight,
+#custom-weather.default,
+#custom-weather.rainyDay,
+#custom-weather.rainyNight,
+#custom-weather.severe,
+#custom-weather.showyIcyDay,
+#custom-weather.snowyIcyNight,
+#custom-weather.sunnyDay {
+    color: @sq-text;
+    background: transparent;
+    /* Squircle pill shape */
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 2px 1px;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* ============================================= */
+/*  📦 DRAWER / POPUP GROUPS                     */
+/*  When clicked, children slide out as a         */
+/*  "popup" panel joined to the bar               */
+/* ============================================= */
+
+/* ─ App Drawer (Menu → tools) ─ */
+#custom-menu {
+    color: @sq-neon-pink;
+    font-size: 110%;
+    padding: 2px 10px;
+    background: @sq-surface;
+    border-radius: 16px;
+    border: 2px solid @sq-neon-pink;
+    box-shadow:
+        0 0 8px @sq-glow-pink,
+        inset 0 0 6px rgba(255, 45, 149, 0.1);
+}
+
+#custom-menu:hover {
+    background: rgba(255, 45, 149, 0.15);
+    box-shadow:
+        0 0 18px @sq-glow-pink,
+        0 0 40px rgba(255, 45, 149, 0.2);
+    color: #fff;
+}
+
+/* Drawer children = floating popup buttons */
+#custom-light_dark,
+#custom-file_manager,
+#custom-tty,
+#custom-browser,
+#custom-settings {
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(191, 90, 242, 0.4);
+    margin: 1px 2px;
+    padding: 2px 8px;
+    color: @sq-text;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        0 0 6px rgba(191, 90, 242, 0.15);
+    animation: popup-slide-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#custom-light_dark:hover,
+#custom-file_manager:hover,
+#custom-tty:hover,
+#custom-browser:hover,
+#custom-settings:hover {
+    background: rgba(191, 90, 242, 0.25);
+    border-color: @sq-neon-purp;
+    color: #fff;
+    box-shadow:
+        0 0 12px @sq-glow,
+        0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ─ Notification Drawer ─ */
+#custom-swaync {
+    color: @sq-neon-gold;
+    background: @sq-surface;
+    border-radius: 16px;
+    border: 2px solid @sq-neon-gold;
+    padding: 2px 10px;
+    box-shadow:
+        0 0 8px rgba(255, 215, 0, 0.3),
+        inset 0 0 6px rgba(255, 215, 0, 0.08);
+}
+
+#custom-swaync:hover {
+    background: rgba(255, 215, 0, 0.12);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.35);
+    color: #fff;
+}
+
+#custom-dot_update {
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255, 215, 0, 0.4);
+    color: @sq-neon-gold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    animation: popup-slide-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#custom-dot_update:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: @sq-neon-gold;
+    color: #fff;
+}
+
+/* ─ Motherboard / System Drawer ─ */
+#temperature {
+    color: @sq-neon-orange;
+    background: @sq-surface;
+    border-radius: 16px;
+    border: 2px solid @sq-neon-orange;
+    padding: 2px 10px;
+    box-shadow:
+        0 0 8px rgba(255, 107, 43, 0.3),
+        inset 0 0 6px rgba(255, 107, 43, 0.08);
+}
+
+#temperature:hover {
+    background: rgba(255, 107, 43, 0.15);
+    box-shadow: 0 0 20px rgba(255, 107, 43, 0.4);
+    color: #fff;
+}
+
+#temperature.critical {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: #ff0000;
+    color: #ff4444;
+    animation: pulse-critical 1s ease-in-out infinite;
+}
+
+#cpu {
+    color: @sq-neon-cyan;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 6px rgba(0, 240, 255, 0.15);
+    animation: popup-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#cpu:hover {
+    background: rgba(0, 240, 255, 0.15);
+    border-color: @sq-neon-cyan;
+    color: #fff;
+    box-shadow: 0 0 15px @sq-glow-cyan;
+}
+
+#memory {
+    color: @sq-neon-purp;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(191, 90, 242, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 6px rgba(191, 90, 242, 0.15);
+    animation: popup-slide-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#memory:hover {
+    background: rgba(191, 90, 242, 0.2);
+    border-color: @sq-neon-purp;
+    color: #fff;
+}
+
+#disk {
+    color: @sq-neon-lime;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(57, 255, 20, 0.35);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 6px rgba(57, 255, 20, 0.12);
+    animation: popup-slide-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#disk:hover {
+    background: rgba(57, 255, 20, 0.12);
+    border-color: @sq-neon-lime;
+    color: #fff;
+}
+
+#power-profiles-daemon {
+    color: @sq-neon-lime;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(57, 255, 20, 0.35);
+    animation: popup-slide-in 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#power-profiles-daemon:hover {
+    background: rgba(57, 255, 20, 0.12);
+    color: #fff;
+}
+
+
+/* ─ Audio Drawer ─ */
+#pulseaudio {
+    color: @sq-neon-pink;
+    background: @sq-surface;
+    border-radius: 16px;
+    border: 2px solid @sq-neon-pink;
+    padding: 2px 10px;
+    box-shadow:
+        0 0 8px @sq-glow-pink,
+        inset 0 0 6px rgba(255, 45, 149, 0.08);
+}
+
+#pulseaudio:hover {
+    background: rgba(255, 45, 149, 0.15);
+    box-shadow: 0 0 20px @sq-glow-pink;
+    color: #fff;
+}
+
+#pulseaudio.muted {
+    color: #ff4444;
+    border-color: #ff4444;
+    box-shadow: 0 0 8px rgba(255, 68, 68, 0.3);
+}
+
+#pulseaudio#microphone {
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255, 45, 149, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    animation: popup-slide-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─ Status / Power Drawer ─ */
+#custom-power {
+    color: #ff4444;
+    background: @sq-surface;
+    border-radius: 16px;
+    border: 2px solid #ff4444;
+    padding: 2px 10px;
+    box-shadow:
+        0 0 10px rgba(255, 68, 68, 0.35),
+        inset 0 0 6px rgba(255, 68, 68, 0.1);
+    animation: pulse-power 3s ease-in-out infinite;
+}
+
+#custom-power:hover {
+    background: rgba(255, 68, 68, 0.2);
+    box-shadow: 0 0 25px rgba(255, 68, 68, 0.5);
+    color: #fff;
+}
+
+#custom-lock {
+    color: @sq-neon-cyan;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 6px rgba(0, 240, 255, 0.12);
+    animation: popup-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#custom-lock:hover {
+    background: rgba(0, 240, 255, 0.15);
+    color: #fff;
+}
+
+#custom-quit,
+#custom-reboot {
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255, 68, 68, 0.4);
+    color: #ff6b6b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    animation: popup-slide-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#custom-quit:hover,
+#custom-reboot:hover {
+    background: rgba(255, 68, 68, 0.2);
+    border-color: #ff4444;
+    color: #fff;
+}
+
+
+/* ============================================= */
+/*  🕐 CLOCK — Hero Squircle Module              */
+/* ============================================= */
+
+#clock {
+    color: #fff;
+    background: linear-gradient(135deg, rgba(191, 90, 242, 0.25), rgba(0, 240, 255, 0.15));
+    border-radius: 18px;
+    border: 2px solid @sq-neon-purp;
+    padding: 2px 14px;
+    margin: 2px 4px;
+    font-size: 105%;
+    box-shadow:
+        0 0 15px @sq-glow,
+        0 0 40px rgba(191, 90, 242, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    animation: clock-glow 6s ease-in-out infinite;
+}
+
+#clock:hover {
+    box-shadow:
+        0 0 25px @sq-glow,
+        0 0 50px rgba(191, 90, 242, 0.2);
+}
+
+@keyframes clock-glow {
+    from {
+        border-color: @sq-neon-purp;
+        box-shadow: 0 0 12px @sq-glow;
+    }
+    33% {
+        border-color: @sq-neon-cyan;
+        box-shadow: 0 0 12px @sq-glow-cyan;
+    }
+    66% {
+        border-color: @sq-neon-pink;
+        box-shadow: 0 0 12px @sq-glow-pink;
+    }
+    to {
+        border-color: @sq-neon-purp;
+        box-shadow: 0 0 12px @sq-glow;
+    }
+}
+
+
+/* ============================================= */
+/*  📡 WORKSPACES — Squircle Buttons              */
+/* ============================================= */
+
+#workspaces {
+    background: @sq-surface;
+    border-radius: 18px;
+    border: 2px solid rgba(191, 90, 242, 0.5);
+    padding: 0px 6px;
+    margin: 2px 4px;
+    box-shadow: 0 0 10px @sq-glow;
+}
+
+#taskbar button,
+#workspaces button {
+    color: @sq-text-dim;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    border-radius: 12px;
+    padding: 2px 6px;
+    margin: 2px 1px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#taskbar button.active,
+#workspaces button.active {
+    color: #fff;
+    background: linear-gradient(135deg, @sq-neon-pink, @sq-neon-purp);
+    border-radius: 12px;
+    padding: 2px 10px;
+    box-shadow:
+        0 0 10px @sq-glow-pink,
+        0 2px 8px rgba(0, 0, 0, 0.4);
+    animation: ws-active-pulse 2s ease-in-out infinite;
+}
+
+#workspaces button.focused {
+    color: @sq-neon-cyan;
+}
+
+#workspaces button.urgent {
+    color: #fff;
+    background: rgba(255, 45, 149, 0.3);
+    border-radius: 12px;
+    animation: pulse-critical 0.8s ease-in-out infinite;
+}
+
+#taskbar button:hover,
+#workspaces button:hover {
+    color: #fff;
+    background: rgba(191, 90, 242, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 0 8px @sq-glow;
+}
+
+@keyframes ws-active-pulse {
+    from {
+        box-shadow: 0 0 8px @sq-glow-pink, 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    to {
+        box-shadow: 0 0 18px @sq-glow-pink, 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ============================================= */
+/*  🖥️ WINDOW TITLE                              */
+/* ============================================= */
+
+#window {
+    color: @sq-text;
+    background: transparent;
+    border-radius: 14px;
+    padding: 2px 10px;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+#window:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+
+/* ============================================= */
+/*  🔋 BATTERY                                   */
+/* ============================================= */
+
+#battery {
+    color: @sq-neon-lime;
+    border-radius: 14px;
+}
+
+#battery.warning {
+    color: @sq-neon-orange;
+}
+
+#battery.critical:not(.charging) {
+    color: #ff4444;
+    animation: pulse-critical 1.5s steps(12) infinite alternate;
+}
+
+@keyframes pulse-critical {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.3;
+    }
+}
+
+
+/* ============================================= */
+/*  🌡️ BACKLIGHT                                 */
+/* ============================================= */
+
+#backlight {
+    color: @sq-neon-gold;
+    border-radius: 14px;
+}
+
+/* ============================================= */
+/*  📡 NETWORK                                   */
+/* ============================================= */
+
+#network {
+    color: @sq-neon-cyan;
+    border-radius: 14px;
+}
+
+#network.disconnected {
+    color: #ff4444;
+}
+
+
+/* ============================================= */
+/*  🎵 PLAYER / CAVA                             */
+/* ============================================= */
+
+#custom-playerctl {
+    color: @sq-neon-lime;
+    border-radius: 14px;
+    padding: 2px 8px;
+}
+
+#custom-cava_mviz {
+    color: @sq-neon-pink;
+    font-size: 110%;
+}
+
+
+/* ============================================= */
+/*  ☁️ WEATHER                                    */
+/* ============================================= */
+
+#custom-weather,
+#custom-weather.clearNight,
+#custom-weather.cloudyFoggyDay,
+#custom-weather.cloudyFoggyNight,
+#custom-weather.default,
+#custom-weather.rainyDay,
+#custom-weather.rainyNight,
+#custom-weather.severe,
+#custom-weather.showyIcyDay,
+#custom-weather.snowyIcyNight,
+#custom-weather.sunnyDay {
+    color: @sq-neon-cyan;
+    border-radius: 14px;
+    padding: 2px 8px;
+}
+
+
+/* ============================================= */
+/*  🔒 IDLE INHIBITOR                             */
+/* ============================================= */
+
+#idle_inhibitor {
+    color: @sq-text-dim;
+    border-radius: 14px;
+}
+
+#idle_inhibitor.activated {
+    color: @sq-neon-lime;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+}
+
+/* ============================================= */
+/*  ⌨️ KEYBOARD STATE                             */
+/* ============================================= */
+
+#keyboard-state {
+    color: @sq-neon-cyan;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(0, 240, 255, 0.3);
+    animation: popup-slide-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#custom-keyboard {
+    color: @sq-neon-cyan;
+    background: @sq-surface2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(0, 240, 255, 0.3);
+    animation: popup-slide-in 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+
+/* ============================================= */
+/*  🔔 CUSTOM: NIGHTLIGHT / HYPRIDLE / HINT      */
+/* ============================================= */
+
+#custom-nightlight {
+    color: @sq-neon-gold;
+    border-radius: 14px;
+    padding: 2px 8px;
+}
+
+#custom-nightlight:hover {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    color: #fff;
+}
+
+#custom-hypridle {
+    color: @sq-text-dim;
+    border-radius: 14px;
+}
+
+#custom-hypridle.notactive {
+    color: @sq-neon-lime;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+}
+
+#custom-hint {
+    color: @sq-text-dim;
+    font-size: 90%;
+    padding: 2px 6px;
+}
+
+
+/* ============================================= */
+/*  🔄 UPDATES                                   */
+/* ============================================= */
+
+#custom-updater,
+#custom-dot_update {
+    color: @sq-neon-gold;
+}
+
+/* ============================================= */
+/*  📦 TRAY                                      */
+/* ============================================= */
+
+#tray {
+    background: @sq-surface;
+    border-radius: 14px;
+    border: 1.5px solid rgba(191, 90, 242, 0.3);
+    padding: 0px 6px;
+    margin: 2px 2px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#tray menu * {
+    min-height: 18px;
+}
+
+#tray menu separator {
+    min-height: 14px;
+}
+
+
+/* ============================================= */
+/*  🎚️ SLIDERS                                    */
+/* ============================================= */
+
+#backlight-slider slider,
+#pulseaudio-slider slider {
+    min-width: 0px;
+    min-height: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    min-width: 80px;
+    min-height: 5px;
+    border-radius: 10px;
+    background: @sq-surface2;
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    min-height: 5px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, @sq-neon-purp, @sq-neon-pink);
+    box-shadow: 0 0 6px @sq-glow-pink;
+}
+
+
+/* ============================================= */
+/*  🎬 ANIMATIONS                                */
+/* ============================================= */
+
+/* Popup items slide in from below with spring */
+@keyframes popup-slide-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Power button subtle pulse */
+@keyframes pulse-power {
+    from {
+        box-shadow: 0 0 8px rgba(255, 68, 68, 0.3);
+        border-color: #ff4444;
+    }
+    to {
+        box-shadow: 0 0 18px rgba(255, 68, 68, 0.5);
+        border-color: #ff6b6b;
+    }
+}
+
+@keyframes blink {
+    to {
+        color: #000000;
+    }
+}
+
+
+/* ============================================= */
+/*  🌈 EXTRA: NEON ACCENT OVERRIDES              */
+/* ============================================= */
+
+/* Individual module neon color identity */
+#custom-light_dark { color: @sq-neon-gold; }
+#custom-file_manager { color: @sq-neon-cyan; }
+#custom-tty { color: @sq-neon-lime; }
+#custom-browser { color: @sq-neon-orange; }
+#custom-settings { color: @sq-text; }

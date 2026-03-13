@@ -1,0 +1,190 @@
+/* ---- [Dark] Glassy MacOS — Premium Obsidian Aesthetic ---- */
+/* A deep, sophisticated dark glassmorphism inspired by macOS Night Mode */
+
+@define-color mac-glass       rgba(0, 0, 0, 0.45);
+@define-color mac-glass-light rgba(25, 25, 25, 0.6);
+@define-color mac-border      rgba(255, 255, 255, 0.1);
+@define-color mac-text        #F2F2F2;   /* Off White */
+@define-color mac-text-dim    #A1A1A1;   /* Muted Gray */
+@define-color mac-accent      #FFFFFF;   /* Pure White accent */
+@define-color mac-accent-warm #E0E0E0;   /* Light Gray */
+@define-color mac-warn        #E69138;
+@define-color mac-critical    #FF5555;
+@define-color mac-info        #8BE9FD;
+
+* {
+    font-family: "SF Pro Display", "Inter", "Source Sans Pro";
+    font-weight: 500;
+    min-height: 0;
+    font-size: 13px;
+}
+
+window#waybar {
+    /* Unified Background: Massive Solid Deep Body + Base Glass */
+    background: 
+        linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent 80%),
+        @mac-glass;
+    
+    background-size: 400% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    
+    /* Glowing animated sweep & Slide-in entrance */
+    animation: waybar-slide-down 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), glass-shimmer 15s infinite linear;
+    
+    color: @mac-text;
+    border: 1px solid @mac-border;
+    border-top: none;
+    border-radius: 0px 0px 6px 6px;
+    padding: 0px;
+    box-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.1), 0 4px 25px rgba(0, 0, 0, 0.3);
+    min-height: 32px;
+}
+
+tooltip {
+    color: @mac-text;
+    background: rgba(15, 15, 15, 0.9);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+tooltip label {
+    color: @mac-text;
+}
+
+/* ─── macOS Style Unified Container ─── */
+.modules-center {
+    background-color: transparent;
+    color: @mac-text;
+    border: none;
+    padding: 2px 12px;
+}
+
+.modules-left,
+.modules-right {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* ─── Workspaces — macOS Dots style ─── */
+#workspaces button {
+    color: @mac-accent;
+    opacity: 0.35;
+    padding: 0px 4px;
+    margin: 0px 3px;
+    font-size: 4px;
+    border: none;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#workspaces button:hover {
+    opacity: 0.7;
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    opacity: 1;
+    color: @mac-accent;
+    min-width: 0px;
+    padding: 0px 4px;
+}
+
+#workspaces button.urgent {
+    color: @mac-critical;
+    font-weight: bold;
+}
+
+/* ─── Control Center ─── */
+#custom-control_center {
+    color: @mac-accent;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0px 10px;
+    margin: 2px 0px;
+}
+
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#disk,
+#idle_inhibitor,
+#memory,
+#network,
+#pulseaudio,
+#taskbar,
+#tray,
+#window,
+#custom-weather,
+#custom-power,
+#custom-playerctl,
+#mpris,
+#custom-swaync {
+    padding: 0px 8px;
+    color: @mac-text;
+}
+
+#clock {
+    font-weight: 600;
+    color: @mac-text;
+    letter-spacing: 0.2px;
+}
+
+#window {
+    color: @mac-accent;
+    font-weight: 600;
+}
+
+#battery { color: @mac-accent; }
+#battery.critical { color: @mac-critical; }
+#network { color: @mac-text; }
+#pulseaudio { color: @mac-text; }
+#tray { padding: 0px 2px; }
+
+/* ─── Sliders ─── */
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    min-height: 4px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    border-radius: 4px;
+    background-color: @mac-accent;
+}
+
+#custom-separator {
+    color: rgba(255, 255, 255, 0.1);
+    padding: 0 4px;
+}
+
+@keyframes mac-pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+@keyframes glass-shimmer {
+    0% { background-position: 200% 0, 0% 0%; }
+    100% { background-position: -200% 0, 0% 0%; }
+}
+
+#workspaces button.active {
+    animation: mac-pulse 2s infinite alternate ease-in-out;
+}
+
+@keyframes waybar-slide-down {
+    0% {
+        opacity: 0;
+        margin-top: -40px;
+    }
+    100% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+}

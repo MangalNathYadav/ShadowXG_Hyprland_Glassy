@@ -1,0 +1,204 @@
+/* ---- macOS Creamy Glass — Premium Light Theme ---- */
+/* A warm, sophisticated macOS-inspired aesthetic with creamy latte glassmorphism */
+
+@define-color mac-glass       rgba(255, 255, 255, 0.15);
+@define-color mac-glass-light rgba(255, 255, 255, 0.3);
+@define-color mac-border      rgba(0, 0, 0, 0.15);
+@define-color mac-text        #0D0D0D;   /* Near Black */
+@define-color mac-text-dim    #333333;   /* Charcoal */
+@define-color mac-accent      #1A1715;   /* Dark Coffee-Black */
+@define-color mac-accent-warm #241F1D;   /* Warm Black */
+@define-color mac-warn        #D67D3E;
+@define-color mac-critical    #A63A3A;
+@define-color mac-info        #4A6273;
+
+* {
+    font-family: "SF Pro Display", "Inter", "Source Sans Pro";
+    font-weight: 500;
+    min-height: 0;
+    font-size: 13px;
+}
+
+window#waybar {
+    /* Unified Background: Massive Light Body + Base Glass */
+    background: 
+        linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.6) 30%, rgba(255,255,255,0.6) 70%, transparent 80%),
+        @mac-glass;
+    
+    background-size: 400% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    
+    /* Bold, steady linear sweep for the 'Body Object' feel */
+    animation: glass-shimmer 15s infinite linear;
+    
+    color: @mac-text;
+    border: 1px solid @mac-border;
+    border-top: none;
+    border-radius: 0px 0px 6px 6px;
+    padding: 0px;
+    box-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.6), 0 4px 25px rgba(0, 0, 0, 0.1);
+    min-height: 32px;
+}
+
+tooltip {
+    color: @mac-text;
+    background: rgba(254, 252, 249, 0.85);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 8px 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+tooltip label {
+    color: @mac-text;
+}
+
+/* ─── macOS Style Unified Container ─── */
+.modules-center {
+    background-color: transparent;
+    color: @mac-text;
+    border: none;
+    padding: 2px 12px;
+}
+
+.modules-left,
+.modules-right {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* ─── Workspaces — macOS Dots style ─── */
+#workspaces button {
+    color: @mac-accent;
+    opacity: 0.35;
+    padding: 0px 4px;
+    margin: 0px 3px;
+    font-size: 4px; /* Reduced by 50% */
+    border: none;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#workspaces button:hover {
+    opacity: 0.7;
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    opacity: 1;
+    color: @mac-accent;
+    min-width: 0px;
+    padding: 0px 4px;
+}
+
+#workspaces button.urgent {
+    color: @mac-critical;
+    font-weight: bold;
+}
+
+/* ─── Control Center ─── */
+#custom-control_center {
+    color: @mac-accent;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px; /* Reduced curvature */
+    padding: 0px 10px;
+    margin: 2px 0px;
+}
+
+.control-child {
+    padding: 0px 6px;
+}
+
+/* ─── Unified Module Styling ─── */
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#disk,
+#idle_inhibitor,
+#memory,
+#network,
+#pulseaudio,
+#taskbar,
+#tray,
+#window,
+#custom-weather,
+#custom-power,
+#custom-playerctl,
+#custom-swaync {
+    padding: 0px 8px;
+    color: @mac-text;
+}
+
+/* ─── Clock ─── */
+#clock {
+    font-weight: 600;
+    color: @mac-text;
+    letter-spacing: 0.2px;
+}
+
+/* ─── Window ─── */
+#window {
+    color: @mac-accent;
+    font-weight: 600;
+}
+
+/* ─── System Icons ─── */
+#battery {
+    color: @mac-accent;
+}
+
+#battery.critical {
+    color: @mac-critical;
+}
+
+#network {
+    color: @mac-text;
+}
+
+#pulseaudio {
+    color: @mac-text;
+}
+
+#tray {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/* ─── Sliders ─── */
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    min-height: 4px;
+    border-radius: 4px; /* Reduced curvature */
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    border-radius: 4px; /* Reduced curvature */
+    background-color: @mac-accent-warm;
+}
+
+/* ─── Separator ─── */
+#custom-separator {
+    color: rgba(0, 0, 0, 0.1);
+    padding: 0 4px;
+}
+
+/* macOS subtle pulse for active elements */
+@keyframes mac-pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+/* Glass Shine Animation — Sweeping a massive solid light body across the bar */
+@keyframes glass-shimmer {
+    0% { background-position: 200% 0, 0% 0%; }
+    100% { background-position: -200% 0, 0% 0%; }
+}
+
+#workspaces button.active {
+    animation: mac-pulse 2s infinite alternate ease-in-out;
+}
